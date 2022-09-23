@@ -34,7 +34,7 @@ pipeline {
     stage('final'){
       steps{
         sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION}"
-        withEnv(["HELM_VERSION=Updated_HELM_VERSION"]){
+        withEnv(["HELM_VERSION=${env.Updated_HELM_VERSION}"]){
               sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION} "
          }
       }
