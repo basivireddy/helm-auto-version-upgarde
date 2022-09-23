@@ -23,7 +23,7 @@ pipeline {
       steps{
 
           echo "current version is ${HELM_VERSION}"
-          HELM_VERSION = sh (script: 'echo "0.0.0"', returnStdout: true).trim()
+          env.HELM_VERSION = sh (script: 'echo "0.0.0"', returnStdout: true).trim()
         
           echo "updated version is ${HELM_VERSION}"
       }
