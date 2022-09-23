@@ -23,7 +23,7 @@ pipeline {
           echo "current version is ${HELM_VERSION}"
            sh '''
            
-               git diff --quiet HEAD "$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
+               git diff --quiet HEAD "$(git describe --tags --abbrev=0 HEAD)" -- charts/helm/hello-world
                cf=$?
                echo "change flag ${cf}"
               if [ $cf -ne 0 ]; then
