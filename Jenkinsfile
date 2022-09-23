@@ -25,7 +25,7 @@ pipeline {
 
 	          tag = sh (script: "git describe --tags --abbrev=0 HEAD", returnStdout: true).trim()
                   echo "${tag}"
-                  cf = sh (script: "git diff --quiet HEAD ${tag} -- charts/hello-world", returnStatus=true)
+                  cf = sh (script: "git diff --quiet HEAD ${tag} -- charts/hello-world", returnStatus: true)
                   echo "${cf}"
            }
           /*
