@@ -13,7 +13,9 @@ pipeline {
   }
   stages {
     stage('test'){
-      sh "echo ${HELM_VERSION}"
+      steps{
+         sh "echo ${HELM_VERSION}"
+      }
     }
     
   }
