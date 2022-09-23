@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 
-VERSION = 'unknown'
-
 def loadValuesYaml(x){
   def valueYaml = readYaml (file: 'charts/hello-world/Chart.yaml')
   return  valueYaml[x];
@@ -25,9 +23,9 @@ pipeline {
           echo "current version is ${HELM_VERSION}"
          // env.var assignment only can do with in script block
          script {
-             git diff --quiet HEAD "$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
+             git diff --quiet HEAD "\$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
              cf=$?
-             echo "change flag - $cf"
+             echo "change flag - \$cf"
              if [ $cf -ne 0 ]; then
                  echo "There is a change in helm chart"
              fi
