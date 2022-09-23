@@ -21,6 +21,14 @@ pipeline {
       steps{
 
           echo "current version is ${HELM_VERSION}"
+          script {
+
+	          tag = sh (script: "git describe --tags --abbrev=0 HEAD", returnStdout: true).trim()
+                  echo "${tag}"
+                  cf = sh (script: "git diff --quiet HEAD ${tag} -- charts/hello-world", returnStatus=true)
+                  echo "${cf}"
+           }
+          /*
            sh '''
            
                git diff --quiet HEAD "$(git describe --tags --abbrev=0 HEAD)" -- charts/hello-world
@@ -33,6 +41,10 @@ pipeline {
                echo "${Updated_HELM_VERSION}"
               fi
             '''
+
+           */
+
+
          // env.var assignment only can do with in script block
         // script {
             // git diff --quiet HEAD "$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
