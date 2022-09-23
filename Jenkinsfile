@@ -27,6 +27,9 @@ pipeline {
                   echo "${tag}"
                   cf = sh (script: "git diff --quiet HEAD ${tag} -- charts/hello-world", returnStatus: true)
                   echo "${cf}"
+                  if ( $cf -ne 0 ) {
+                     echo "There is a change in helm chart"
+                  }
            }
           /*
            sh '''
