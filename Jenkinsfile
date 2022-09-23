@@ -24,15 +24,19 @@ pipeline {
 
           echo "current version is ${HELM_VERSION}"
          script {
-          env.HELM_VERSION = sh (script: 'echo "0.0.0"', returnStdout: true).trim()
+             env.Updated_HELM_VERSION = sh (script: 'echo "0.0.0"', returnStdout: true).trim()
+           echo "${env.Updated_HELM_VERSION}"
          }
-          echo "updated version is ${HELM_VERSION}"
+        echo "updated version is ${HELM_VERSION},${env.Updated_HELM_VERSION}"
       }
     }
      
     stage('final'){
       steps{
-          sh "echo ${HELM_VERSION}"
+        sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION}"
+        withEnv(["HELM_VERSION=Updated_HELM_VERSION"]){
+              sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION} "
+         }
       }
     }    
   
