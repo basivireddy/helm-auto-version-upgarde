@@ -21,11 +21,14 @@ pipeline {
     
     stage('auto increment'){
       steps{
-         sh'''
-           echo "current version is ${HELM_VERSION}"
-           HELM_VERSION=`echo "${HELM_VERSION}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g'`
-           echo "updated version is ${HELM_VERSION}"
-         '''
+
+          echo "current version is ${HELM_VERSION}"
+          HELM_VERSION = sh (
+                script: 'echo "${HELM_VERSION}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g'',
+                returnStdout: true
+            ).trim()
+        
+          echo "updated version is ${HELM_VERSION}"
       }
     }
      
