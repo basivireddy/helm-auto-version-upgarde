@@ -24,7 +24,7 @@ pipeline {
 
           echo "current version is ${HELM_VERSION}"
          script {
-             env.Updated_HELM_VERSION = sh (script: 'echo "${HELM_VERSION}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g'', returnStdout: true).trim()
+             env.Updated_HELM_VERSION = sh (script: "echo ${HELM_VERSION} | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g'", returnStdout: true).trim()
              echo "${env.Updated_HELM_VERSION}"
          }
         echo "updated version is ${HELM_VERSION},${env.Updated_HELM_VERSION}"
