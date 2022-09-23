@@ -8,6 +8,7 @@ def loadValuesYaml(x){
 }
 
 pipeline {
+  agent any
   environment {
     HELM_VERSION = loadValuesYaml('version')
   }
