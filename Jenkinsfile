@@ -26,9 +26,9 @@ pipeline {
              git diff --quiet HEAD "\$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
              cf=$?
             // echo "change flag ${cf}"
-             if [ $cf -ne 0 ]; then
-                 echo "There is a change in helm chart"
-             fi
+            // if [ $cf -ne 0 ]; then
+            //     echo "There is a change in helm chart"
+             // fi
              env.Updated_HELM_VERSION = sh (script: "echo ${HELM_VERSION} | awk -F. '{\$NF = \$NF + 1;} 1' | sed 's/ /./g'", returnStdout: true).trim()
              echo "${env.Updated_HELM_VERSION}"
          }
