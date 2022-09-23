@@ -3,7 +3,7 @@
 VERSION = 'unknown'
 
 def loadValuesYaml(x){
-  def valueYaml = readyaml (file: 'charts/hello-world/Chart.yaml')
+  def valueYaml = readYaml (file: 'charts/hello-world/Chart.yaml')
   return  valueYaml[x];
 }
 
