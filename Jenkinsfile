@@ -25,7 +25,7 @@ pipeline {
          script {
              git diff --quiet HEAD "\$(git describe --tags --abbrev=0 HEAD)" -- helm/hello-world
              cf=$?
-             echo "change flag - \$cf"
+               echo "change flag - ${cf}"
              if [ $cf -ne 0 ]; then
                  echo "There is a change in helm chart"
              fi
