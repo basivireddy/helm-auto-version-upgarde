@@ -51,8 +51,8 @@ pipeline {
 	  stage('updated'){
 		  steps{  
 			  script {
-		  def read = readYaml (file: 'charts/hello-world/Chart.yaml')
-		  echo "${read}"
+		 // def read = readYaml (file: 'charts/hello-world/Chart.yaml')
+		 // echo "${read}"
 				  if ( env.Updated_HELM_VERSION == null ){
 					  env.Updated_HELM_VERSION = HELM_VERSION
 				  }
@@ -61,6 +61,8 @@ pipeline {
 		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" charts/hello-world/Chart.yaml
 		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
+		 // Push the code
+				  
 				  
 		//  read.version = "${env.Updated_HELM_VERSION}"
 		//  writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
