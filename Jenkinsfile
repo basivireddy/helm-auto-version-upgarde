@@ -57,7 +57,9 @@ pipeline {
 					  env.Updated_HELM_VERSION = HELM_VERSION
 				  }
 				  
-		  '''sed -i "s/^version: .*/version: $env.Updated_HELM_VERSION/" charts/hello-world/Chart.yaml'''
+		  sh'''
+		   sed -i "s/^version: .*/version: ${env.Updated_HELM_VERSION}/" charts/hello-world/Chart.yaml
+		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
 				  
 		//  read.version = "${env.Updated_HELM_VERSION}"
