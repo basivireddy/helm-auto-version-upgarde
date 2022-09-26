@@ -52,7 +52,7 @@ pipeline {
 			  script {
 		  def read = readYaml (file: 'charts/hello-world/Chart.yaml')
 		  echo "${read}"
-		  read.size = ${env.Updated_HELM_VERSION}
+		  read.version = "${env.Updated_HELM_VERSION}"
 		  writeYaml file: 'datas.yaml', data: read
 		  sh "cat datas.yaml "
 			  }
