@@ -51,7 +51,7 @@ pipeline {
 		  steps{  
 		  def read = readYaml (file: 'charts/hello-world/Chart.yaml')
 		  echo "${read}"
-		  assert read.size = ${env.Updated_HELM_VERSION}
+		  read.size = ${env.Updated_HELM_VERSION}
 		  writeYaml file: 'datas.yaml', data: read
 		  sh "cat datas.yaml "
 		  
