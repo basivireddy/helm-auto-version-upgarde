@@ -56,9 +56,13 @@ pipeline {
 				  if ( env.Updated_HELM_VERSION == null ){
 					  env.Updated_HELM_VERSION = HELM_VERSION
 				  }
-		  read.version = "${env.Updated_HELM_VERSION}"
-		  writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
-		  sh "cat charts/hello-world/Chart.yaml "
+				  
+		  '''sed -i "s/^version: .*/version: $env.Updated_HELM_VERSION/" charts/hello-world/Chart.yaml'''
+		 sh "cat charts/hello-world/Chart.yaml "
+				  
+		//  read.version = "${env.Updated_HELM_VERSION}"
+		//  writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
+		//  sh "cat charts/hello-world/Chart.yaml "
 			  }
 		  }
 	  }
