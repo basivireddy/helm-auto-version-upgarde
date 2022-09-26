@@ -58,7 +58,7 @@ pipeline {
 				  }
 				  
 		  sh'''
-		   sed -i "s/^version: .*/version: ${env.Updated_HELM_VERSION}/" charts/hello-world/Chart.yaml
+		   sed -i "s/^version: .*/version: $env.Updated_HELM_VERSION/" charts/hello-world/Chart.yaml
 		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
 				  
