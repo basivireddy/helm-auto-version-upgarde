@@ -43,8 +43,9 @@ pipeline {
         sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION}"
         //global env varibles can't override  with assignment , only can override with withEnv block  
         withEnv(["HELM_VERSION=${env.Updated_HELM_VERSION}"]){
-              sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION} "
+              sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION}"
          }
+	 
       }
     }    
 	  stage('updated'){
@@ -52,9 +53,12 @@ pipeline {
 			  script {
 		  def read = readYaml (file: 'charts/hello-world/Chart.yaml')
 		  echo "${read}"
+				  if ( env.Updated_HELM_VERSION == null ){
+					  env.Updated_HELM_VERSION = HELM_VERSION
+				  }
 		  read.version = "${env.Updated_HELM_VERSION}"
-		  writeYaml file: 'datas.yaml', data: read
-		  sh "cat datas.yaml "
+		  writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
+		  sh "cat charts/hello-world/Chart.yaml "
 			  }
 		  }
 	  }
