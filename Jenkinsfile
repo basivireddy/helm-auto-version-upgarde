@@ -26,7 +26,7 @@ def auto(chartpath,HELM_VERSION){
 				  }
 				  
 		  sh'''
-		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" ${chartpath}/Chart.yaml
+		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" $chartpath/Chart.yaml
 		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
 		 // Push the code
