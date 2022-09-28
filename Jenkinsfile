@@ -10,7 +10,7 @@ def auto(chartpath,HELM_VERSION){
 	script {
 	          tag = sh (script: "git describe --tags --abbrev=0 HEAD", returnStdout: true).trim()
                   echo "${tag}"
-                  cf = sh (script: "git diff --quiet HEAD ${tag} -- charts/hello-world", returnStatus: true)
+		cf = sh (script: "git diff --quiet HEAD ${tag} -- ${chartpath}", returnStatus: true)
                   echo "${cf}"
                   if ( cf != 0 ) {
                      echo "There is a change in helm chart"
@@ -26,7 +26,7 @@ def auto(chartpath,HELM_VERSION){
 				  }
 				  
 		  sh'''
-		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" charts/hello-world/Chart.yaml
+		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" ${chartpath}/Chart.yaml
 		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
 		 // Push the code
@@ -56,7 +56,7 @@ pipeline {
 
           echo "current version is ${HELM_VERSION}"
 	      script {
-		      auto('charts/hello-world/Chart.yaml',HELM_VERSION)
+		      auto('charts/hello-world',HELM_VERSION)
 	      }
 
 
