@@ -24,9 +24,9 @@ def auto(chartpath,HELM_VERSION){
 				  if ( env.Updated_HELM_VERSION == null ){
 					  env.Updated_HELM_VERSION = HELM_VERSION
 				  }
-				  
+		echo "${chartpath}"	  
 		  sh'''
-		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" "$chartpath"/Chart.yaml
+		   sed -i "s/^version: .*/version: $Updated_HELM_VERSION/" "${chartpath}"/Chart.yaml
 		  '''
 		 sh "cat charts/hello-world/Chart.yaml "
 		 // Push the code
