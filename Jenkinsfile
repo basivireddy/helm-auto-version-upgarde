@@ -14,15 +14,15 @@ def auto(chartpath,HELM_VERSION){
                   echo "${cf}"
                   if ( cf != 0 ) {
                      echo "There is a change in helm chart"
-                     env.Updated_HELM_VERSION = sh (script: "echo ${HELM_VERSION} | awk -F. '{\$NF = \$NF + 1;} 1' | sed 's/ /./g'", returnStdout: true).trim()
+                     Updated_HELM_VERSION = sh (script: "echo ${HELM_VERSION} | awk -F. '{\$NF = \$NF + 1;} 1' | sed 's/ /./g'", returnStdout: true).trim()
                      echo "${Updated_HELM_VERSION}"
                   }
 	
 				  
 		 // def read = readYaml (file: 'charts/hello-world/Chart.yaml')
 		 // echo "${read}"
-				  if ( env.Updated_HELM_VERSION == null ){
-					  env.Updated_HELM_VERSION = HELM_VERSION
+				  if ( Updated_HELM_VERSION == null ){
+					  Updated_HELM_VERSION = HELM_VERSION
 				  }
 		echo "${chartpath}"	
 		sh (script: "sed -i \"s/^version: .*/version: $Updated_HELM_VERSION/\" ${chartpath}/Chart.yaml", returnStatus: true)
@@ -37,7 +37,7 @@ def auto(chartpath,HELM_VERSION){
 		//  writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
 		//  sh "cat charts/hello-world/Chart.yaml "
 			  }
-	//return Updated_HELM_VERSION
+	return Updated_HELM_VERSION;
 }
 
 pipeline {
@@ -57,7 +57,8 @@ pipeline {
 
           echo "current version is ${HELM_VERSION}"
 	      script {
-		      auto('charts/hello-world',HELM_VERSION)
+		      env.Updated_HELM_VERSION = auto('charts/hello-world',HELM_VERSION)
+		      echo "${env.Updated_HELM_VERSION}"
 	      }
 
 
