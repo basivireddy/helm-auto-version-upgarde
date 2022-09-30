@@ -44,6 +44,7 @@ pipeline {
   agent any
   environment {
     HELM_VERSION = loadValuesYaml('version')
+    BRANCH_NAME_TEST = "${GIT_BRANCH.split("/")[1]}"
   }
   stages {
     stage('init'){
@@ -71,6 +72,8 @@ pipeline {
         //global env varibles can't override  with assignment , only can override with withEnv block  
         withEnv(["HELM_VERSION=${env.Updated_HELM_VERSION}"]){
               sh "echo ${HELM_VERSION},${env.Updated_HELM_VERSION}"
+		
+		sh "echo ${BRANCH_NAME_TEST}, ${env.BRANCH_NAME}"
          }
 	 
       }
