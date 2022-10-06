@@ -60,8 +60,9 @@ pipeline {
         //sh "echo ${jsonObj.name}"  // prints out katone
         sh "echo ${jsonObj.results}"   // prints out 5
 		      sh "${jsonObj.results.size()}"
-		      def size = 
-			      if ( jsonObj.results.size() == 1 ){
+		      def size = jsonObj.results.size()
+		      echo "${size}"
+			      if ( size == 1 ){
 				      echo "objects there"
 			      }
 			      
