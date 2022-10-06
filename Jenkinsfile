@@ -53,12 +53,20 @@ pipeline {
 	      script {
 		      
 		      
-		      def jsonString = '{"name":"katone","age":5}'
+		      def jsonString = '{"results":[{ "uri": "test"} ]}'
         def jsonObj = readJSON text: jsonString
 
-        assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
-        sh "echo ${jsonObj.name}"  // prints out katone
-        sh "echo ${jsonObj.age}"   // prints out 5
+       // assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
+        //sh "echo ${jsonObj.name}"  // prints out katone
+        sh "echo ${jsonObj.results}"   // prints out 5
+		      sh "${jsonObj.results.size()}"
+		      def size = 
+			      if ( jsonObj.results.size() == 1 ){
+				      echo "objects there"
+			      }
+			      
+		      
+		      
 		      
 		      
 		      
