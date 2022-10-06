@@ -53,7 +53,8 @@ pipeline {
 	      script {
 		      
 		      
-		      def jsonString = '{"results":[{ "uri": "test"} ]}'
+		 //     def jsonString = '{"results":[{ "uri": "test"} ]}'
+		      def jsonString = '{"results":[ ]}'
         def jsonObj = readJSON text: jsonString
 
        // assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
