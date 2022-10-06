@@ -50,6 +50,22 @@ pipeline {
     stage('init'){
       steps{
          sh "echo ${HELM_VERSION}"
+	      script {
+		      
+		      
+		      def jsonString = '{"name":"katone","age":5}'
+        def jsonObj = readJSON text: jsonString
+
+        assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
+        sh "echo ${jsonObj.name}"  // prints out katone
+        sh "echo ${jsonObj.age}"   // prints out 5
+		      
+		      
+		      
+		      
+	      }
+		      
+	      
       }
     }
     
@@ -58,8 +74,9 @@ pipeline {
 
           echo "current version is ${HELM_VERSION}"
 	      script {
-		      env.Updated_HELM_VERSION = auto('charts/hello-world',HELM_VERSION)
-		      echo "${env.Updated_HELM_VERSION}"
+		       env.Updated_HELM_VERSION = auto('charts/hello-world',HELM_VERSION)
+		       echo "${env.Updated_HELM_VERSION}"
+		      echo "hi"
 	      }
 
 
