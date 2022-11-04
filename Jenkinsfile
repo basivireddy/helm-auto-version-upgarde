@@ -78,7 +78,25 @@ pipeline {
 	      
       }
     }
-    
+
+	        stage("Interactive_Input") {
+            steps {
+                script {
+			
+                def userInput = input(
+			id: 'userInput', message: 'Enter path of test App: helm-auto-version-upgarde - ${env.BRANCH_NAME} reports:?', 
+                 parameters: [
+                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Path of config file', name: 'Config'],
+                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Test Info file', name: 'Test']
+                ])
+                echo ("IQA Sheet Path: "+userInput['Config'])
+                echo ("Test Info file path: "+userInput['Test'])
+                              
+                }
+	    }
+		}
+	  
+	  
     stage('auto increment'){
       steps{
 
