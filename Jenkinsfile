@@ -84,7 +84,7 @@ pipeline {
                 script {
 			
                 def userInput = input(
-			id: 'userInput', message: 'Enter path of test App: helm-auto-version-upgarde - ${env.BRANCH_NAME} reports:?', 
+			id: 'userInput', message: "Enter path of test App: helm-auto-version-upgarde - env.BRANCH_NAME  ${env.BRANCH_NAME_TEST}  env.BRANCH_NAME_TEST  reports:?", 
                  parameters: [
                  [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Path of config file', name: 'Config'],
                  [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Test Info file', name: 'Test']
