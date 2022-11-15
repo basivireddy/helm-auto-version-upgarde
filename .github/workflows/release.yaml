@@ -22,6 +22,13 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
 
+      - name: Auto Increment
+        run: |
+           tag=$(git describe --tags --abbrev=0 HEAD")
+           echo "$tag"
+           cf=$(git diff --quiet HEAD ${tag} -- helm/hello-world)
+           echo "$cf"
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.0
         env:
