@@ -47,55 +47,6 @@ pipeline {
     BRANCH_NAME_TEST = "${GIT_BRANCH.split("/")[1]}"
   }
   stages {
-    stage('init'){
-      steps{
-         sh "echo ${HELM_VERSION}"
-	      script {
-		      
-		      
-		 //     def jsonString = '{"results":[{ "uri": "test"} ]}'
-		      def jsonString = '{"results":[ ]}'
-        def jsonObj = readJSON text: jsonString
-
-       // assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
-        //sh "echo ${jsonObj.name}"  // prints out katone
-        sh "echo ${jsonObj.results}"   // prints out 5
-		      echo "${jsonObj.results.size()}"
-		      def size = jsonObj.results.size()
-		      echo "${size}"
-			      if ( size == 1 ){
-				      echo "objects there"
-			      }
-			      
-		      
-		      
-		      
-		      
-		      
-		      
-	      }
-		      
-	      
-      }
-    }
-
-	        stage("Interactive_Input") {
-            steps {
-                script {
-			
-                def userInput = input(
-			id: 'userInput', message: "Enter path of test App: helm-auto-version-upgarde -  ${env.BRANCH_NAME_TEST}  ${BUILD_URL}  reports?", 
-                 parameters: [
-                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Path of config file', name: 'Config'],
-                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Test Info file', name: 'Test']
-                ])
-                echo ("IQA Sheet Path: "+userInput['Config'])
-                echo ("Test Info file path: "+userInput['Test'])
-                              
-                }
-	    }
-		}
-	  
 	  
     stage('auto increment'){
       steps{
