@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 
+// https://blog.jdriven.com/2020/03/groovy-goodness-parse-yaml-with-yamlslurper/
+	
 def loadValuesYaml(x){
   def valueYaml = readYaml (file: 'charts/hello-world/Chart.yaml')
   return  valueYaml[x];
