@@ -1,0 +1,32 @@
+#!/usr/bin/env groovy
+
+def loadValuesYaml(x){
+  def valueYaml = readYaml (file: 'charts/hello-world/Chart.yaml')
+  return  valueYaml[x];
+}
+
+pipeline {
+  agent any
+  environment {
+    HELM_VERSION = loadValuesYaml('version')
+    BRANCH_NAME_TEST = "${GIT_BRANCH.split("/")[1]}"
+  }
+  stages {
+	  
+    stage('Yaml read write'){
+      steps{
+
+          echo "current version is ${HELM_VERSION}"
+	      script {
+             sh "cat charts/hello-world/Chart.yaml "
+		         read.version = "1.0.1"
+		         writeYaml file: 'charts/hello-world/Chart.yaml', data: read, overwrite: true
+		         sh "cat charts/hello-world/Chart.yaml "
+	      }
+
+
+      }
+    }    
+
+  }
+}
